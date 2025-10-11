@@ -21,7 +21,7 @@ jobs:
         working-directory: ./document-frontend
 
       - name: Build Angular app
-        run: npm run build
+        run: npm run build -- --output-path=dist/document-frontend
         working-directory: ./document-frontend
 
       - name: Deploy to Azure Static Web App
@@ -33,3 +33,4 @@ jobs:
           app_location: "document-frontend"
           api_location: ""
           output_location: "document-frontend/dist/document-frontend"
+
