@@ -3,7 +3,7 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - main  # or your branch name
+      - main
 
 jobs:
   build_and_deploy_job:
@@ -14,14 +14,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # or your Node.js version
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
         working-directory: ./document-frontend
 
       - name: Build Angular app
-        run: npm run build -- --output-path=dist/document-frontend
+        run: npm run build
         working-directory: ./document-frontend
 
       - name: Deploy to Azure Static Web App
@@ -32,4 +32,4 @@ jobs:
           action: "upload"
           app_location: "document-frontend"
           api_location: ""
-          output_location: "dist/document-frontend"
+          output_location: "document-frontend/dist/document-frontend"
