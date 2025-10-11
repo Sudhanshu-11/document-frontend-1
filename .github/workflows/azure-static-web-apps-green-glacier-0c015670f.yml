@@ -8,8 +8,10 @@ on:
 jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
+    name: Build and Deploy Angular App
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -17,11 +19,11 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: ./document-frontend
 
       - name: Build Angular app
-        run: npm run build -- --output-path=dist/document-frontend
+        run: npm run build -- --output-path=dist/document-frontend/browser
         working-directory: ./document-frontend
 
       - name: Deploy to Azure Static Web App
@@ -32,5 +34,4 @@ jobs:
           action: "upload"
           app_location: "document-frontend"
           api_location: ""
-          output_location: "document-frontend/dist/document-frontend"
-
+          output_location: "document-frontend/dist/document-frontend/browser"
